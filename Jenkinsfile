@@ -9,8 +9,8 @@ pipeline {
     stage('dockerfile build ') {
       steps {
         sh '''
-        docker info
-        app = docker.build("https://github.com/dhlee011/Gitops_Test")
+        docker info        
+        docker build -t nginx https://github.com/dhlee011/Gitops_Test
         '''
       }
     }
