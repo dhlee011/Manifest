@@ -1,20 +1,17 @@
 pipeline {
-  environment {
-    imagename = "test/test2"
-    dockerImage = ''
-  }
   agent any
   stages {
     stage('Cloning Git') {
-        checkout scm
+      steps {   
+        git branch: 'main', credentialsId: 'ehdgo', url: 'https://github.com/dhlee011/Gitops_Test'
 
       }
     }
     stage('Building image') {
       steps{
-        script {
-          dockerImage = docker.build imagename
-        }
+        sh '''
+        docker info
+        '''
       }
     }
 
