@@ -10,8 +10,7 @@ pipeline {
       steps {
         sh '''
         docker info
-        docker build -t nginx .
-        app = docker.build("902268280034.dkr.ecr.ap-northeast-2.amazonaws.com/test-ecr")
+        app = docker.build("https://github.com/dhlee011/Gitops_Test")
         '''
       }
     }
