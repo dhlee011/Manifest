@@ -16,13 +16,5 @@ pipeline {
       }
     }
 
-    stage('dockerfile push ') {
-      steps {
-        docker.withRegistry('https://902268280034.dkr.ecr.ap-northeast-2.amazonaws.com/test-ecr', 'ecr:ap-northeast-2:teichae-ecr-credentials') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-        }
-      }
-    }
   }
 }
