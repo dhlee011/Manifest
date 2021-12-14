@@ -1,10 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('Cloning Git') {
-      steps {   
-        git branch: 'main', credentialsId: 'ehdgo', url: 'https://github.com/dhlee011/Gitops_Test'
-
+    stage('git scm update') {
+      steps {
+        git url: 'https:/dhlee011/Gitops_test.git', branch: 'main'
       }
     }
     stage('Building image') {
