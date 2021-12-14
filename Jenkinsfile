@@ -1,14 +1,21 @@
 pipeline {
+  environment {
+    imagename = "yenigul/hacicenkins"
+    dockerImage = ''
+  }
   agent any
   stages {
-    stage('git scm update') {
+    stage('Cloning Git') {
       steps {
-        git url: 'https://github.com/dhlee011/Gitops_Test.git', branch: 'main'
+        git([url: 'https://github.com/dhlee011/Gitops_Test.git', branch: 'main', credentialsId: 'ehdgo'])
+
       }
     }
-    stage('dockerfile build ') {
-      steps {
-        app = docker.build("902268280034.dkr.ecr.ap-northeast-2.amazonaws.com/test-ecr")
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build imagename
+        }
       }
     }
 
