@@ -25,10 +25,18 @@ pipeline {
                     docker.withRegistry('https://902268280034.dkr.ecr.ap-northeast-2.amazonaws.com', 'ecr:ap-northeast-2:AWSC') {
                     app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
-                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dlehdgo', usernameVariable: 'dhlee', passwordVariable: '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']]) {
-                        sh('sudo git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/gitops_test.git')
-                        }
-                    }
+                    
+                    }                    
+                }
+            }
+        
+        stage('push image') {
+            steps{
+                script{
+                    git branch: 'dev', credentialsId: 'dlehdgo', url: 'https://github.com/dhlee011/k8s-manifest.git'
+                    sh "git add ."
+                    sh "git push -u origin master"
+                    }                    
                 }
             }
         }
