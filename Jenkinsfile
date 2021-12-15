@@ -26,7 +26,7 @@ pipeline {
                     app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dlehdgo', usernameVariable: 'dhlee', passwordVariable: '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']]) {
-                        sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/gitops_test.git')
+                        sh('sudo git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/gitops_test.git')
                         }
                     }
                 }
