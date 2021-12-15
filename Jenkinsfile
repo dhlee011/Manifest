@@ -25,6 +25,11 @@ pipeline {
                     docker.withRegistry('https://902268280034.dkr.ecr.ap-northeast-2.amazonaws.com', 'ecr:ap-northeast-2:AWSC') {
                     app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dlehdgo', usernameVariable: 'dhlee', passwordVariable: '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']]) {
+
+                        sh("git tag -a some_tag -m 'Jenkins'")
+                        sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@gitops_test --tags')
+                        }
                     }
                 }
             }
