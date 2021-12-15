@@ -29,14 +29,14 @@ pipeline {
                     }                    
                 }
             }
-        
-        stage('push image') {
+        }
+        stage('push image2') {
             steps{
                 script{
                     git branch: 'dev', credentialsId: 'dlehdgo', url: 'https://github.com/dhlee011/k8s-manifest.git'
                     sh "git add ."
                     sh "git push -u origin master"
-                    }                    
+                                        
                 }
             }
         }
