@@ -10,7 +10,7 @@ pipeline {
             steps{
             sh '''
             docker info
-            docker build -t https://github.com/dhlee011/Gitops_Test.git#main:dockerfile
+            docker build -t https://github.com/dhlee011/gitops_Test.git#main:dockerfile
             '''
             }
         }
