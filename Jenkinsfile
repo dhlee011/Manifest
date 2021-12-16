@@ -49,7 +49,6 @@ pipeline {
                     
 
   
-                    sh "git push https://${GIT_AUTHOR_NAME}:${GIT_PASSWORD}@https://github.com/dhlee011/k8s-manifest"
                     sh "git remote update origin --prune"
                     sh "git remote show origin"
                     sh "git remote -v"
