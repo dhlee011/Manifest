@@ -48,7 +48,7 @@ pipeline {
                     withCredentials([[$class: "UsernamePasswordMultiBinding", credentialsId: "test", usernameVariable: "dhlee011", passwordVariable: "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"]]) {
                     
                     sh "git add ."
-                    sh "git commit -m "    
+  
                     sh "git push https://${GIT_AUTHOR_NAME}:${GIT_PASSWORD}@https://github.com/dhlee011/k8s-manifest"
                     sh "git remote update origin --prune"
                     sh "git remote show origin"
