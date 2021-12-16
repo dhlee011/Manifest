@@ -36,9 +36,11 @@ pipeline {
         stage('push image2') {
             steps{
                 script{
+                    sh "git remote -v"
                     git branch: 'main', credentialsId: 'dlehdgo', url: 'https://github.com/dhlee011/k8s-manifest.git'
                     sh "git remote set-url origin https://github.com/dhlee011/k8s-manifest"
                     sh "git remote update origin --prune"
+                    sh "git remote -v"
                     sh "git add ."
                     sh "git push -u origin main"
                                         
