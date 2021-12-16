@@ -40,7 +40,7 @@ pipeline {
                     sh "cd ww"
                     sh "echo 'zzz' > zzz"
                     sh "git remote -v"
-                    sh "git remote add origin https://dhlee011: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@github.com/dhlee011/k8s-manifest"
+                    sh "git remote add origin git@github.com:dhlee011/k8s-manifest.git"
                     git branch: 'main', credentialsId: 'test', url: 'https://github.com/dhlee011/k8s-manifest.git'
                     sh "git remote set-url origin https://github.com/dhlee011/k8s-manifest"
                     sh "git remote update origin --prune"
