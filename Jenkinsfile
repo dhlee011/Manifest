@@ -15,6 +15,8 @@ pipeline {
                     git clone https://github.com/dhlee011/gitops_test.git
                     docker build https://github.com/dhlee011/gitops_test.git#main:.
                     ls -al
+                    pwd
+                    git remote remove origin
                     '''
                     app = docker.build("902268280034.dkr.ecr.ap-northeast-2.amazonaws.com/dhlee")
                 }
@@ -34,7 +36,7 @@ pipeline {
         stage('push image2') {
             steps{
                 script{
-                    sh "git remote set-url origin https://github.com/dhlee011/k8s-manifest"
+                  
                     git branch: 'dev', credentialsId: 'dlehdgo', url: 'https://github.com/dhlee011/k8s-manifest.git'
                     sh "git add ."
                     sh "git push -u origin main"
