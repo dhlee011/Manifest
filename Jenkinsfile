@@ -53,7 +53,7 @@ pipeline {
                     sh "git remote -v"
                     
                     sh "git push https://github.com/dhlee011/k8s-manifest main"
-                                        
+                    }                    
                 }
             }
         }
