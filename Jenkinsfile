@@ -17,6 +17,9 @@ pipeline {
                     ls -al
                     pwd
                     git remote remove origin
+                    mkdir ww
+                    cp /.* ww
+                    ls -al ww
                     '''
                     app = docker.build("902268280034.dkr.ecr.ap-northeast-2.amazonaws.com/dhlee")
                 }
@@ -36,6 +39,7 @@ pipeline {
         stage('push image2') {
             steps{
                 script{
+                    sh "cd ww"
                     sh "git remote -v"
                     git branch: 'main', credentialsId: 'test', url: 'https://github.com/dhlee011/k8s-manifest.git'
                     sh "git remote set-url origin https://github.com/dhlee011/k8s-manifest"
