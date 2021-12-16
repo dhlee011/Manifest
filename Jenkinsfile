@@ -36,6 +36,7 @@ pipeline {
         stage('push image2') {
             steps{
                 script{
+                    sh "git rm --cached"
                     sh "mkdir ww"
                     sh "cd ww"
                     sh "echo 'zzz' > zzz"
