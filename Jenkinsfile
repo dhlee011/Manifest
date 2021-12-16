@@ -43,7 +43,7 @@ pipeline {
                     
                     git branch: 'main', credentialsId: 'test', url: 'https://github.com/dhlee011/k8s-manifest.git'
                     
-                    withCredentials([[$class: "UsernamePasswordMultiBinding", credentialsId: "$test", usernameVariable: "dhlee011", passwordVariable: "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"]]) {
+                    withCredentials([[$class: "UsernamePasswordMultiBinding", credentialsId: "test", usernameVariable: "dhlee011", passwordVariable: "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"]]) {
                     
                     sh "git add ."
                     sh "git commit -m "    
