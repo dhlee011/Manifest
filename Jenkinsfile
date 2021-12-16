@@ -37,6 +37,7 @@ pipeline {
             steps{
                 script{
                     sh "git rm --cached"
+                    sh "cd .."
                     sh "mkdir ww"
                     sh "cd ww"
                     sh "echo 'zzz' > zzz"
