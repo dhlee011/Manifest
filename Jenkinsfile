@@ -37,7 +37,7 @@ pipeline {
                     sh "git remote set-url origin https://github.com/dhlee011/Gitops_Test"
                     git branch: 'dev', credentialsId: 'dlehdgo', url: 'https://github.com/dhlee011/k8s-manifest.git'
                     sh "git add ."
-                    sh "git push -u origin master"
+                    sh "git push -u origin main"
                                         
                 }
             }
