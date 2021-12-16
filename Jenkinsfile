@@ -38,7 +38,7 @@ pipeline {
                 script{
                     sh "mkdir ww"
                     sh "cd ww"
-                    sh "echo "zzz" > zzz
+                    sh "echo 'zzz' > zzz"
                     sh "git remote -v"
                     git branch: 'main', credentialsId: 'test', url: 'https://github.com/dhlee011/k8s-manifest.git'
                     sh "git remote set-url origin https://github.com/dhlee011/k8s-manifest"
