@@ -14,6 +14,7 @@ pipeline {
                     docker info
                     git clone https://github.com/dhlee011/gitops_test.git
                     docker build https://github.com/dhlee011/gitops_test.git#main:.
+                    ls -al
                     '''
                     app = docker.build("902268280034.dkr.ecr.ap-northeast-2.amazonaws.com/dhlee")
                 }
