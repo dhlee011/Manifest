@@ -4,7 +4,7 @@ pipeline {
         stage("git"){
             steps{
             
-                git branch: 'main', credentialsId: 'dlehdgo', url: 'https://github.com/dhlee011/Gitops_Test.git'
+                git branch: 'main', credentialsId: 'test', url: 'https://github.com/dhlee011/Gitops_Test.git'
             }
         }
         stage('Building image') {
@@ -37,7 +37,7 @@ pipeline {
             steps{
                 script{
                     sh "git remote -v"
-                    git branch: 'main', credentialsId: 'dlehdgo', url: 'https://github.com/dhlee011/k8s-manifest.git'
+                    git branch: 'main', credentialsId: 'test', url: 'https://github.com/dhlee011/k8s-manifest.git'
                     sh "git remote set-url origin https://github.com/dhlee011/k8s-manifest"
                     sh "git remote update origin --prune"
                     sh "git remote -v"
