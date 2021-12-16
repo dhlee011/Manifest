@@ -40,9 +40,11 @@ pipeline {
                     sh "cd ww"
                     sh "echo 'zzz' > zzz"
                     sh "git remote -v"
+                    sh "git rm --cached gitops_test"
                     git branch: 'main', credentialsId: 'test', url: 'https://github.com/dhlee011/k8s-manifest.git'
                     sh "git remote set-url origin https://github.com/dhlee011/k8s-manifest"
                     sh "git remote update origin --prune"
+                    sh "git remote show origin"
                     sh "git remote -v"
                     sh "git add ."
                     sh "git push -u origin main"
