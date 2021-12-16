@@ -36,7 +36,7 @@ pipeline {
         stage('push image2') {
             steps{
                 script{
-
+                    sh "git rm --cached gitops_test"
                     sh "cd .."
                     sh "mkdir ww"
                     sh "cd ww"
