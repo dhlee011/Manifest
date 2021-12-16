@@ -46,8 +46,8 @@ pipeline {
                     sh "git remote update origin --prune"
                     sh "git remote show origin"
                     sh "git remote -v"
-                    sh "git add ."
-                    sh "git push -u origin main"
+                    
+                    sh "git push https://github.com/dhlee011/k8s-manifest main"
                                         
                 }
             }
