@@ -53,16 +53,15 @@ pipeline {
                     sh "git config user.name \"dhlee011\""
                     sh "git checkout main"    
                    
-                    sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git"
+                    sh "git config --local credential.helper '!f() { echo username=\\dhlee011; echo password=\\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; }; f'"
+                        
                     sh "git remote update origin --prune"
-                    sh "git config user.email \"dlehdgo011@naver.com\""
-                    sh "git config user.name \"dhlee011\""
-                    sh "git checkout main"
+
                     sh "git add ."    
                     sh "git remote show origin"
                     sh "git remote -v"
                     sh "git config --global credential.helper store"
-                    sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@https://github.com/dhlee011/k8s-manifest.git"
+                    sh "git push origin HEAD:main"
                     }               
                 }
             }
