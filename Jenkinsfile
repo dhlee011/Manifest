@@ -49,6 +49,7 @@ pipeline {
                     
                     git branch: 'main', credentialsId: 'TEST', url: 'https://github.com/dhlee011/k8s-manifest.git'
                     withCredentials([[$class: "UsernamePasswordMultiBinding", credentialsId: "TEST", usernameVariable: "dhlee011", passwordVariable: "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"]]) {                                  
+                    sh "git remote add origin git@github.com:dhlee011/k8s-manifest.git"
                     sh "git remote update origin --prune"
                     sh "git config user.email \"dlehdgo011@naver.com\""
                     sh "git config user.name \"dhlee011\""
@@ -57,7 +58,7 @@ pipeline {
                     sh "git remote show origin"
                     sh "git remote -v"
     
-                    sh "git push https://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@github.com/dhlee011/k8s-manifest.git"
+                    sh "git push git@github.com:dhlee011/k8s-manifest.git"
                         
                     }               
                 }
