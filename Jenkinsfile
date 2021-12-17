@@ -45,6 +45,8 @@ pipeline {
                     sh "rm -rf gitops_test"
                     sh "mkdir ww"
                     withCredentials([usernamePassword(credentialsId: 'TEST', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    sh "git config --global user.name dhlee011"
+                    sh "git config --global user.email dlehdgo011@naver.com"    
                     sh "cd ww"
                     sh "echo 'zzz' > zzz"
                     sh "git remote -v"
