@@ -58,6 +58,7 @@ pipeline {
                     sh "git remote show origin"
                     sh "git remote -v"
                     sh "git config --global credential.helper store"
+                    sh "git push origin main"
                     }               
                 }
             }
