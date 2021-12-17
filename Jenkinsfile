@@ -60,8 +60,9 @@ pipeline {
                     sh "git remote -v"
                     sh "git commit -m 'init committ'"
                     sh "git branch -M main"
-                    sh "git push -u origin main"
-                    sh "git push https://dhlee011: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@github.com/dhlee011/k8s-manifest"
+                    sh "git pull origin main"
+                    sh "git push -u origin +main"
+                    
                    
                               
                 }
