@@ -50,7 +50,7 @@ pipeline {
                     sh "echo 'zzz' > zzz"
                     sh "git remote -v"
                     sh "git remote add origin https://github.com/dhlee011/k8s-manifest"
-                    sh "git add."
+                    sh "git add ."
                     sh "git commit -m 'test-init'"
                     
                     withCredentials([usernamePassword(credentialsId: 'TEST', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
