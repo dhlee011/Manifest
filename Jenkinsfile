@@ -61,7 +61,7 @@ pipeline {
                     sh "git commit -m 'init committ'"
                     sh "git branch -M main"
                     sh "git config --global credential.helper store"
-                    sh "git push https://dhlee011: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@/github.com/dhlee011/k8s-manifest"
+                    sh "git push https://dhlee011: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@github.com/dhlee011/k8s-manifest"
                    
                               
                 }
