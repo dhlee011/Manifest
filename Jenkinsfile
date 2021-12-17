@@ -1,10 +1,13 @@
+
+
+
 pipeline {
     agent any
     stages {
         stage("git"){
             steps{
             
-                git branch: 'main', credentialsId: 'TEST', url: 'https://github.com/dhlee011/Gitops_Test.git'
+                git branch: 'main', credentialsId: 'test', url: 'https://github.com/dhlee011/Gitops_Test.git'
             }
         }
         stage('Building image') {
@@ -37,7 +40,6 @@ pipeline {
             steps{
                 script{
 
-                    sg "ls"
                     sh "cd .."
                     sh "mkdir ww"
                     sh "cd ww"
@@ -45,17 +47,16 @@ pipeline {
                     sh "git remote -v"
                     
                     git branch: 'main', credentialsId: 'test', url: 'https://github.com/dhlee011/k8s-manifest.git'
-                    
-                    withCredentials([[$class: "UsernamePasswordMultiBinding", credentialsId: "TEST", usernameVariable: "dhlee011", passwordVariable: "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"]]) {
-                    
-
-  
+                                                      
+                    sh "git add ."
+                    sh "git commit -m "    
+                    sh "git push https://${GIT_AUTHOR_NAME}:${GIT_PASSWORD}@https://github.com/dhlee011/k8s-manifest"
                     sh "git remote update origin --prune"
                     sh "git remote show origin"
                     sh "git remote -v"
                     
                     sh "git push https://github.com/dhlee011/k8s-manifest main"
-                    }                    
+                                   
                 }
             }
         }
