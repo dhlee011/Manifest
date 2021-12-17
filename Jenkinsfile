@@ -54,7 +54,6 @@ pipeline {
                     sh "git config user.name \"dhlee011\""
                     sh "git checkout main"
                     sh "git add ."    
-                    sh "git config password
                     sh "git remote show origin"
                     sh "git remote -v"
                     sh "git push --set-upstream origin main"    
