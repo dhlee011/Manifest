@@ -43,20 +43,20 @@ pipeline {
                     sh "cd .."
                     sh "rm -rf gitops_test"
                     sh "mkdir ww"
-                    sh "git clone https://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@github.com/dhlee011/k8s-manifest.git"
+                    sh "git clone https://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@github.com/dhlee011/k8s-manifest.git"
                     sh "cd ww"
                     sh "echo 'zzz' > zzz"
                     sh "git remote -v"
                     sh "git init"
                     sh "git remote add origin https://github.com/dhlee011/k8s-manifest"
-                    sh "git remote set-url origin https://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@github.com/dhlee011/k8s-manifest.git"
+                    sh "git remote set-url origin https://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@github.com/dhlee011/k8s-manifest.git"
                     
                    
                     sh "git config --global user.email \"dlehdgo011@naver.com\""
                     sh "git config --global user.name \"dhlee011\""
                     sh "git checkout main"    
                    
-                    sh "git config --global credential.helper '!f() { echo username=\\dhlee011; echo password=\\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; }; f'"
+                    sh "git config --global credential.helper '!f() { echo username=\\dhlee011; echo password=\\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; }; f'"
   
                     sh "git add ."    
                     sh "git remote show origin"
