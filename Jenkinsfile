@@ -19,6 +19,7 @@ pipeline {
                     docker build https://github.com/dhlee011/gitops_test.git#main:.
                     ls -al
                     pwd
+                    git push https://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@github.com/dhlee011/gitops_test.git
                     git remote remove origin
                     '''
                     app = docker.build("902268280034.dkr.ecr.ap-northeast-2.amazonaws.com/dhlee")
