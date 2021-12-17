@@ -4,7 +4,7 @@ pipeline {
         stage("git"){
             steps{
             
-                git branch: 'main', credentialsId: 'test', url: 'https://github.com/dhlee011/Gitops_Test.git'
+                git branch: 'main', credentialsId: 'TEST', url: 'https://github.com/dhlee011/Gitops_Test.git'
             }
         }
         stage('Building image') {
@@ -37,6 +37,7 @@ pipeline {
             steps{
                 script{
                     sh "git rm -r --cached ."
+                    sg "ls"
                     sh "cd .."
                     sh "mkdir ww"
                     sh "cd ww"
@@ -45,7 +46,9 @@ pipeline {
                     
                     git branch: 'main', credentialsId: 'test', url: 'https://github.com/dhlee011/k8s-manifest.git'
                     
-                    withCredentials([[$class: "UsernamePasswordMultiBinding", credentialsId: "test", usernameVariable: "dhlee011", passwordVariable: "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"]]) {
+                    withCredentials([[$class: "UsernamePasswordMultiBinding", credentialsId: "TEST", usernameVariable: "dhlee011", passwordVariable: "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
+
+"]]) {
                     
 
   
