@@ -49,7 +49,7 @@ pipeline {
                     
                     git branch: 'main', credentialsId: 'TEST', url: 'https://github.com/dhlee011/k8s-manifest.git'
                                                       
-                    withCredentials([[$class: "UsernamePasswordMultiBinding", TEST: "$GIT_CREDENTIALS_ID", dhlee011: "GIT_AUTHOR_NAME", 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: "GIT_PASSWORD"]]) {
+                    withCredentials([[$class: "UsernamePasswordMultiBinding", TEST: "GIT_CREDENTIALS_ID", dhlee011: "GIT_AUTHOR_NAME", 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: "GIT_PASSWORD"]]) {
                     sh "git config user.email \"dlehdgo011@naver.com\""
                     sh "git config user.name \"dhlee011\""
                     sh("git tag -a some_tag -m 'Jenkins")
