@@ -55,7 +55,6 @@ pipeline {
                    
                     sh "git remote show origin"
                     sh "git remote -v"
-                    sh "git push origin main"
                     sh "git push --force https://dhlee011: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@github.com/dhlee011/k8s-manifest.git"
                     }               
                 }
