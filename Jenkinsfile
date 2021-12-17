@@ -62,7 +62,7 @@ pipeline {
                     sh "git commit -m 'init committ'"
                     sh "git branch -M main"
                     sh "git config --list"
-                    sh "git pull --allow-unrelated-histories"
+                    sh "git pull origin main --allow-unrelated-histories"
                     sh "git push -u origin +main"
                     
                    
