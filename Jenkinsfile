@@ -45,14 +45,14 @@ pipeline {
                     sh "rm -rf gitops_test"
                     sh "mkdir ww"
                     
-                    withCredentials([usernamePassword(credentialsId: 'ci-github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    withCredentials([usernamePassword(credentialsId: 'TEST', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git')    
                     sh "cd ww"
                     sh "echo 'zzz' > zzz"
                     sh "git remote -v"
                     sh "git init"
                     sh "git remote add origin https://github.com/dhlee011/k8s-manifest"
-                    sh "git remote set-url origin https://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@github.com/dhlee011/k8s-manifest.git"
+                   
                     
                    
                     sh "git config --global user.email \"dlehdgo011@naver.com\""
