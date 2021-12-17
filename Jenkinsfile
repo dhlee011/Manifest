@@ -39,9 +39,8 @@ pipeline {
         stage('push image2') {
             steps{
                 script{
-
+                    sh "git rm --cached ."
                     sh "cd .."
-                    sh "git rm --cached gitops_test"
                     sh "rm -rf gitops_test"
                     sh "mkdir ww"
                     sh "cd ww"
@@ -49,7 +48,7 @@ pipeline {
                     sh "git remote -v"
                     
                     git branch: 'main', credentialsId: 'test', url: 'https://github.com/dhlee011/k8s-manifest.git'
-                                                      
+                    withCredentials([[$class: "UsernamePasswordMultiBinding", credentialsId: "TEST", usernameVariable: "dhlee011", passwordVariable: "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"]]) {                                  
                     sh "git add ."
                     sh "git commit -m "    
                     sh "git push https://${GIT_AUTHOR_NAME}:${GIT_PASSWORD}@https://github.com/dhlee011/k8s-manifest"
@@ -58,7 +57,7 @@ pipeline {
                     sh "git remote -v"
                     
                     sh "git push https://github.com/dhlee011/k8s-manifest main"
-                                   
+                    }               
                 }
             }
         }
