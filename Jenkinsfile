@@ -56,7 +56,7 @@ pipeline {
                     sh "git remote show origin"
                     sh "git remote -v"
                     sh "git config --global core.askpass /usr/libexec/git-core/git-gui--askpass"
-                    sh "git push https://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@github.com/dhlee011/k8s-manifest.git"
+                    sh "git push https://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@github.com/dhlee011/k8s-manifest.git"
                     }               
                 }
             }
