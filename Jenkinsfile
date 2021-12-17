@@ -57,7 +57,7 @@ pipeline {
                     sh "git add ."    
                     sh "git remote show origin"
                     sh "git remote -v"
-    
+                    sh "eval `ssh-agent`"
                     sh "git push git@github.com:dhlee011/k8s-manifest.git"
                         
                     }               
