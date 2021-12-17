@@ -53,7 +53,7 @@ pipeline {
                     sh "git config user.name \"dhlee011\""
                     sh "git checkout main"    
                     sh "git tag -a some_tag -m 'Jenkins"
-                    sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git'
+                    sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git"
                     sh "git remote update origin --prune"
                     sh "git config user.email \"dlehdgo011@naver.com\""
                     sh "git config user.name \"dhlee011\""
