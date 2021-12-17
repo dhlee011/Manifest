@@ -58,6 +58,7 @@ pipeline {
                     sh "git remote show origin"
                     sh "git remote -v"
                     sh "eval `ssh-agent`"
+                    sh "ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts"    
                     sh "git push git@github.com:dhlee011/k8s-manifest.git"
                         
                     }               
