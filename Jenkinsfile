@@ -49,11 +49,11 @@ pipeline {
                     
                     git branch: 'main', credentialsId: 'TEST', url: 'https://github.com/dhlee011/k8s-manifest.git'
                                                       
-                    withCredentials([usernamePassword( TEST: 'GIT_CREDENTIALS_ID', dhlee011: 'GIT_AUTHOR_NAME', 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: 'GIT_PASSWORD')]) {
+                    withCredentials([usernamePassword( credentialId : 'TEST', usernameVariable : 'dhlee011', passwordVariable : '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')]) {
                     sh "git config user.email \"dlehdgo011@naver.com\""
                     sh "git config user.name \"dhlee011\""
                     sh("git tag -a some_tag -m 'Jenkins")
-                    sh 'git push https://${GIT_AUTHOR_NAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git'
+                    sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git'
                     sh "git remote update origin --prune"
                     sh "git config user.email \"dlehdgo011@naver.com\""
                     sh "git config user.name \"dhlee011\""
