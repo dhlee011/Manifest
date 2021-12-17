@@ -48,7 +48,7 @@ pipeline {
                     sh "git remote -v"
                    
                     sh "git remote add origin https://github.com/dhlee011/k8s-manifest"
-                    withCredentials([usernamePassword( credentialsId : 'TEST', usernameVariable : 'dhlee011', passwordVariable : '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')]) {
+                    withCredentials([usernamePassword( credentialsId : 'TEST', usernameVariable : 'dhlee011', passwordVariable : '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')]) {
                     sh "git config user.email \"dlehdgo011@naver.com\""
                     sh "git config user.name \"dhlee011\""
                     sh "git checkout main"    
