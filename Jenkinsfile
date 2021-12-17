@@ -41,6 +41,8 @@ pipeline {
                 script{
 
                     sh "cd .."
+                    sh "git rm --cached gitops_test"
+                    sh "rm -rf gitops_test"
                     sh "mkdir ww"
                     sh "cd ww"
                     sh "echo 'zzz' > zzz"
