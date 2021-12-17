@@ -53,7 +53,7 @@ pipeline {
                     sh "git config user.name \"dhlee011\""
                     sh "git checkout main"    
                    
-                    sh "git config --local credential.helper '!f() { echo username=\\dhlee011; echo password=\\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; }; f'"
+                    sh "git config --local credential.helper '!f() { echo username=\\dhlee011; echo password=\\dltk5maxwell2@; }; f'"
                         
                     sh "git remote update origin --prune"
 
