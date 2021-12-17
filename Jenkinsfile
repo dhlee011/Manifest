@@ -48,7 +48,7 @@ pipeline {
                     sh "git remote -v"
                     
                     git branch: 'main', credentialsId: 'TEST', url: 'https://github.com/dhlee011/k8s-manifest.git'
-                    withCredentials([[$class: "UsernamePasswordMultiBinding", credentialsId: "TEST", usernameVariable: "dhlee011", passwordVariable: "dltk5maxwell2@"]]) {                                  
+                                                      
                     withCredentials([usernamePassword(credentialsId: 'TEST', passwordVariable: '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', usernameVariable: 'dhlee')]) {
                     sh("git tag -a some_tag -m 'Jenkins'")
                     sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git --tags')
