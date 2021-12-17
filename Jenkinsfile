@@ -60,6 +60,7 @@ pipeline {
                     sh "git remote -v"
                     sh "git commit -m 'init committ'"
                     sh "git branch -M main"
+                    sh "git config --list"
                     sh "git pull origin main"
                     sh "git push -u origin +main"
                     
