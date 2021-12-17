@@ -52,23 +52,8 @@ pipeline {
                     sh "git init"
                     sh "git remote add origin https://github.com/dhlee011/k8s-manifest"
                     withCredentials([usernamePassword(credentialsId: 'TEST', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                    sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git')                     
-                    
-                   
-                    sh "git config --global user.email \"dlehdgo011@naver.com\""
-                    sh "git config --global user.name \"dhlee011\""
-                    sh "git checkout main"    
-                    
-                   
-  
-                    sh "git add ."    
-                    sh "git remote show origin"
-                    sh "git remote -v"
-                    sh "git commit -m 'init committ'"
-                    sh "git branch -M main"
-                    sh "git config --list"
-                    sh "git pull origin main --allow-unrelated-histories"
-                    sh "git push -u origin +main"
+                    sh('git push -f https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git')                     
+   
                     }
                    
                               
