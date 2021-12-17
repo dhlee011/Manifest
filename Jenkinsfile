@@ -18,8 +18,7 @@ pipeline {
                     git clone https://github.com/dhlee011/gitops_test.git
                     docker build https://github.com/dhlee011/gitops_test.git#main:.
                     ls -al
-                    pwd
-                    git push https://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@github.com/dhlee011/gitops_test.git
+                    pwd                
                     git remote remove origin
                     '''
                     app = docker.build("902268280034.dkr.ecr.ap-northeast-2.amazonaws.com/dhlee")
@@ -51,13 +50,14 @@ pipeline {
                     git branch: 'main', credentialsId: 'TEST', url: 'https://github.com/dhlee011/k8s-manifest.git'
                     withCredentials([[$class: "UsernamePasswordMultiBinding", credentialsId: "TEST", usernameVariable: "dhlee011", passwordVariable: "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"]]) {                                  
                     sh "git remote update origin --prune"
-                    sh "git clone https://github.com/dhlee011/k8s-manifest.git"
+                    sh "git config user.email \"dlehdgo011@naver.com\""
+                    sh "git config user.name \"dhlee011\""
+                    sh "git checkout main"
                     sh "git add ."    
                    
                     sh "git remote show origin"
                     sh "git remote -v"
-                    sh "git config --global core.askpass /usr/libexec/git-core/git-gui--askpass"
-                    sh "git push https://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@github.com/dhlee011/k8s-manifest.git"
+                    sh "git push"
                     }               
                 }
             }
