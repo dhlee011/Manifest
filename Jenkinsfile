@@ -46,21 +46,23 @@ pipeline {
                     sh "cd ww"
                     sh "echo 'zzz' > zzz"
                     sh "git remote -v"
-                   
+                    sh "git init"
                     sh "git remote add origin https://github.com/dhlee011/k8s-manifest"
-                    withCredentials([usernamePassword( credentialsId : 'TEST', usernameVariable : 'dhlee011', passwordVariable : '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')]) {
-                    sh "git config user.email \"dlehdgo011@naver.com\""
-                    sh "git config user.name \"dhlee011\""
+                   
+                    sh "git config --global user.email \"dlehdgo011@naver.com\""
+                    sh "git config --global user.name \"dhlee011\""
                     sh "git checkout main"    
                    
-                    sh "git config --local credential.helper '!f() { echo username=\\dhlee011; echo password=\\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; }; f'"
+                    sh "git config --global credential.helper '!f() { echo username=\\dhlee011; echo password=\\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; }; f'"
   
                     sh "git add ."    
                     sh "git remote show origin"
                     sh "git remote -v"
+                    sh "git commit -m 'init committ'"
+                    sh "git branch -M main"
                     sh "git config --global credential.helper store"
                     sh "git push -u origin +main"
-                    }               
+                              
                 }
             }
         }
