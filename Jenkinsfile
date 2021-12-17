@@ -39,11 +39,14 @@ pipeline {
         stage('push image2') {
             steps{
                 script{
+
                     sh "git rm -r --cached ."
                     sh "cd .."
                     sh "rm -rf gitops_test"
                     sh "mkdir ww"
-                    sh "git clone https://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@github.com/dhlee011/k8s-manifest.git"
+                    
+                    withCredentials([usernamePassword(credentialsId: 'ci-github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git')    
                     sh "cd ww"
                     sh "echo 'zzz' > zzz"
                     sh "git remote -v"
@@ -55,7 +58,7 @@ pipeline {
                     sh "git config --global user.email \"dlehdgo011@naver.com\""
                     sh "git config --global user.name \"dhlee011\""
                     sh "git checkout main"    
-                   
+                    
                     sh "git config --global credential.helper '!f() { echo username=\\dhlee011; echo password=\\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; }; f'"
   
                     sh "git add ."    
@@ -66,7 +69,7 @@ pipeline {
                     sh "git config --list"
                     sh "git pull origin main --allow-unrelated-histories"
                     sh "git push -u origin +main"
-                    
+                    }
                    
                               
                 }
