@@ -13,6 +13,8 @@ pipeline {
         stage('Building image') {
             steps{
                 script{
+                  
+                    slackSend(message: "Build Start!" , color: 'good', tokenCredentialID: 'slack-key')
                     sh '''
                     docker info
                     git clone https://github.com/dhlee011/gitops_test.git
@@ -22,12 +24,14 @@ pipeline {
                     git remote remove origin
                     '''
                     app = docker.build("902268280034.dkr.ecr.ap-northeast-2.amazonaws.com/dhlee")
+                    
                 }
             }
         }
         stage('push image') {
             steps{
                 script{
+                    slackSend(message: "Docker Image Push To ECR Start!" , color: 'good', tokenCredentialID: 'slack-key')
                     docker.withRegistry('https://902268280034.dkr.ecr.ap-northeast-2.amazonaws.com', 'ecr:ap-northeast-2:AWSC') {
                     app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
@@ -39,7 +43,7 @@ pipeline {
         stage('push image2') {
             steps{
                 script{
-
+                    slackSend(message: "manifestfile Push To github Start!" , color: 'good', tokenCredentialID: 'slack-key')
                     sh "git rm -r --cached ."
                     sh "cd .."
                     sh "rm -rf gitops_test"
