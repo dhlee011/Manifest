@@ -43,6 +43,7 @@ pipeline {
                     sh "cd .."
                     sh "rm -rf gitops_test"
                     sh "mkdir ww"
+                    sh "git clone https://github.com/dhlee011/k8s-manifest.git"
                     sh "cd ww"
                     sh "echo 'zzz' > zzz"
                     sh "git remote -v"
@@ -61,7 +62,7 @@ pipeline {
                     sh "git commit -m 'init committ'"
                     sh "git branch -M main"
                     sh "git config --list"
-                    sh "git pull origin main"
+                    sh "git pull --allow-unrelated-histories"
                     sh "git push -u origin +main"
                     
                    
