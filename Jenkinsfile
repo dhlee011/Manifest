@@ -54,7 +54,7 @@ pipeline {
                     sh "git checkout main"    
                    
                     sh "git config --local credential.helper '!f() { echo username=\\dhlee011; echo password=\\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; }; f'"
-                    sh "git pull origin main"    
+                    sh "git pull origin main --allow-unrelated-histories"   
                     sh "git add ."    
                     sh "git remote show origin"
                     sh "git remote -v"
