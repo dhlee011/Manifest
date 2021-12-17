@@ -12,9 +12,8 @@ pipeline {
         }
         stage('Building image') {
             steps{
-                slackSend(message: "Build Start!" , color: 'good', tokenCredentialId: 'slack-key')
                 script{
-                  
+                    slackSend(message: "Build Start!" , color: 'good', tokenCredentialId: 'slack-key')
                     
                     sh '''
                     docker info
