@@ -57,6 +57,7 @@ pipeline {
                    
                     sh "git remote show origin"
                     sh "git remote -v"
+                    sh "git push --set-upstream origin main"    
                     sh "git push"
                     }               
                 }
