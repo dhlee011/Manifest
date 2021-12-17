@@ -54,7 +54,7 @@ pipeline {
                     sh "git config --global user.name \"dhlee011\""
                     sh "git checkout main"    
                    
-                    sh "git config --global credential.helper '!f() { echo username=\\dhlee011; echo password=\\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 }; f'"
+                    sh "git config --global credential.helper '!f() { echo username=\\dhlee011; echo password=\\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; }; f'"
   
                     sh "git add ."    
                     sh "git remote show origin"
