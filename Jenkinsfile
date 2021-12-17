@@ -54,11 +54,12 @@ pipeline {
                     sh "git config user.name \"dhlee011\""
                     sh "git checkout main"
                     sh "git add ."    
-                   
+                    sh "git config password
                     sh "git remote show origin"
                     sh "git remote -v"
                     sh "git push --set-upstream origin main"    
-                    sh "git push"
+                    sh "git push https://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@github.com/dhlee011/k8s-manifest.git"
+                        
                     }               
                 }
             }
