@@ -48,8 +48,9 @@ pipeline {
                     sh "echo 'zzz' > zzz"
                     sh "git remote -v"
                     sh "git init"
-                    sh "git remote set-url origin https://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@github.com/dhlee011/k8s-manifest"
                     sh "git remote add origin https://github.com/dhlee011/k8s-manifest"
+                    sh "git remote set-url origin https://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@github.com/dhlee011/k8s-manifest"
+                    
                    
                     sh "git config --global user.email \"dlehdgo011@naver.com\""
                     sh "git config --global user.name \"dhlee011\""
