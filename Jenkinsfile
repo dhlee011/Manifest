@@ -4,7 +4,7 @@ pipeline {
         stage("git"){
             steps{
             
-                git branch: 'main', credentialsId: 'TEST', url: 'https://github.com/dhlee011/Gitops_Test.git'
+                git branch: 'main', credentialsId: 'build', url: 'https://github.com/dhlee011/Gitops_Test.git'
             }
         }
         stage('Building image') {
@@ -45,7 +45,7 @@ pipeline {
                     sh "cd .."
                     sh "rm -rf gitops_test"
                     sh "mkdir ww"
-                    withCredentials([usernamePassword(credentialsId: 'TEST', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    withCredentials([usernamePassword(credentialsId: 'build', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh "git config --global user.name dhlee011"
                     sh "git config --global user.email dlehdgo011@naver.com"    
                     sh "cd ww"
