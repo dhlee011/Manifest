@@ -11,10 +11,9 @@ pipeline {
             steps{
                 script{
                     slackSend(message: "Build Start!" , color: 'good', tokenCredentialId: 'slack-key')
+                    sh "docker build https://github.com/dhlee011/application.git#main:."
                     app = docker.build("902268280034.dkr.ecr.ap-northeast-2.amazonaws.com/dhlee")
-                    sh '''         
-                    git remote remove origin
-                    '''
+                    sh "git remote remove origin"
                     
                 }
             }
