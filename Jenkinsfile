@@ -50,7 +50,6 @@ pipeline {
                     cd push
                     git config --global user.name dhlee011
                     git config --global user.email dlehdgo011@naver.com
-                    git remote -v
                     git remote add origin https://github.com/dhlee011/k8s-manifest
                     git add .
                     git commit -m 'test-init'
