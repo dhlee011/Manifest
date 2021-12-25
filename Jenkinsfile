@@ -1,13 +1,13 @@
 pipeline {   
     agent any
     stages {
-        stage("git"){
+        stage("Git SCM"){
             steps{
             
                 git branch: 'main', credentialsId: 'git-app', url: 'https://github.com/dhlee011/application.git'
             }
         }
-        stage('Building image') {
+        stage('Building Image') {
             steps{
                 script{
                     slackSend(message: "Build Start!" , color: 'good', tokenCredentialId: 'slack-key')
@@ -19,7 +19,7 @@ pipeline {
                 }
             }
         }
-        stage('push image') {
+        stage('Docker Image Push To ECR') {
             steps{
                 script{
                     
@@ -32,7 +32,7 @@ pipeline {
                 }
             }
         }
-        stage('push image2') {
+        stage('Manifest File Push To k8s-manifest Repository') {
             steps{
                 script{
                     slackSend(message: "manifestfile Push To github Start!" , color: 'good', tokenCredentialId: 'slack-key')
@@ -43,13 +43,51 @@ pipeline {
                     ls
                     #!/bin/bash
                     cat>nginx.yaml<<-EOF
+                    
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app.kubernetes.io/name: alb-ingress-controller
+  name: alb-ingress-controller
+  namespace: nginx
+
+---
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: alb-ingress-controller
+  name: alb-ingress-controller
+  namespace: nginx
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: alb-ingress-controller
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: alb-ingress-controller
+    spec:
+      containers:
+        - name: alb-ingress-controller
+          args:
+            - --ingress-class=alb
+            - --cluster-name=eks-cluster-dev
+            - --aws-vpc-id=vpc-01caf96063ed0cbd9		##########
+            - --aws-region=ap-northeast-2
+          image: docker.io/amazon/aws-alb-ingress-controller:v1.1.3
+      serviceAccountName: alb-ingress-controller                    
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
   name: nginx-service
-  namespace: argocd
+  namespace: nginx
   annotations:
     alb.ingress.kubernetes.io/healthcheck-path: "/"
 spec:
@@ -67,7 +105,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx
-  namespace: argocd
+  namespace: nginx
   labels:
     app: nginx
 spec:
@@ -92,7 +130,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  namespace: argocd
+  namespace: nginx
   name: nginx-ingress
   annotations:
     kubernetes.io/ingress.class: alb
