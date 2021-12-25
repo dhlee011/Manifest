@@ -69,7 +69,7 @@ spec:
         app: cb-test-api
     spec:
       containers:
-      - image: ${ECR_TASK_URL}:ver${env.BUILD_NUMBER}
+      - image: nginx
         imagePullPolicy: Always
         name: cb-test-api
         ports:
