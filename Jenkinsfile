@@ -43,7 +43,7 @@ pipeline {
                     slackSend(message: "manifestfile Push To github Start!" , color: 'good', tokenCredentialId: 'slack-key')
                     git branch: 'main', credentialsId: 'git-app', url: 'https://github.com/dhlee011/application.git'
                     withCredentials([usernamePassword(credentialsId: 'git-app', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                    sh '''
+                    sh """
                     git rm -r --cached .
                     cd ..
                     rm -rf application
@@ -54,6 +54,7 @@ pipeline {
                     git config --global user.name dhlee011
                     git config --global user.email dlehdgo011@naver.com
                     git remote add origin https://github.com/dhlee011/k8s-manifest
+                    #!/bin/bash
                     cat>deployment.yaml<<EOF
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -74,7 +75,7 @@ spec:
         ports:
         - containerPort: 9000
 EOF
-                    '''
+                    """
                     sh "git add ."
                     sh "git commit -m '1-init'"
 
