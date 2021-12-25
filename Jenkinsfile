@@ -51,7 +51,7 @@ pipeline {
                     cd push
                     git config --global user.name dhlee011
                     git config --global user.email dlehdgo011@naver.com
-                    git remote -v
+                    git clone https://github.com/dhlee011/k8s-manifest
                     git remote add origin https://github.com/dhlee011/k8s-manifest
                     #!/bin/bash
                     cat>deployment.yaml<<EOF
