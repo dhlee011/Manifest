@@ -42,25 +42,73 @@ pipeline {
                     rm -rf *
                     ls
                     #!/bin/bash
-                    cat>deployment.yaml<<-EOF
-apiVersion: extensions/v1beta1
+                    cat>nginx.yaml<<-EOF
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: argocd
+  annotations:
+    alb.ingress.kubernetes.io/healthcheck-path: "/"
+spec:
+  selector:
+     app: nginx
+  type: NodePort
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 80
+
+---
+
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cb-test-api
-  namespace: prd-api
+  name: nginx
+  namespace: argocd
+  labels:
+    app: nginx
 spec:
-  replicas: 1
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx 
   template:
     metadata:
       labels:
-        app: cb-test-api
+        app: nginx 
     spec:
       containers:
-      - image: nginx
-        imagePullPolicy: Always
-        name: cb-test-api
+      - name: nginx
+        image: nginx:1.14.2
         ports:
-        - containerPort: 9000
+        - containerPort: 80
+
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: argocd
+  name: nginx-ingress
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: instance
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: "nginx-service"
+                port:
+                  number: 8080
 EOF"""
 
                     sh "git config --global user.name dhlee011"
