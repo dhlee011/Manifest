@@ -54,7 +54,7 @@ pipeline {
                     git config --global user.name dhlee011
                     git config --global user.email dlehdgo011@naver.com
                     git remote add origin https://github.com/dhlee011/k8s-manifest
-                    cat>nginx-deployment.yaml<<-EOF
+                    cat <<EOF > nginx-deployment.yaml
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
