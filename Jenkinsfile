@@ -75,7 +75,8 @@ spec:
         name: cb-test-api
         ports:
         - containerPort: 9000
-EOF"""
+EOF
+                    '''
                     sh "git add ."
                     sh "git commit -m '1-init'"
 
