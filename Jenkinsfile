@@ -49,6 +49,7 @@ pipeline {
                     rm -rf application
                     mkdir push
                     cd push
+                    git init
                     git config --global user.name dhlee011
                     git config --global user.email dlehdgo011@naver.com
                     git remote add origin https://github.com/dhlee011/k8s-manifest
