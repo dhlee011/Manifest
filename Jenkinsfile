@@ -76,8 +76,11 @@ spec:
         - containerPort: 9000
 EOF
                     """
+                    sh "ls"
+                    sh "pwd"
                     sh "git add ."
                     sh "git commit -m '1-init'"
+                    
 
 
                     sh "git push -f https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git"
