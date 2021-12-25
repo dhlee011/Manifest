@@ -49,12 +49,8 @@ pipeline {
                     rm -rf application
                     mkdir push
                     cd push
-                    git config --global user.name dhlee011
-                    git config --global user.email dlehdgo011@naver.com
-                    git clone https://github.com/dhlee011/k8s-manifest
-                    git remote add origin https://github.com/dhlee011/k8s-manifest
                     #!/bin/bash
-                    cat>deployment.yaml<<EOF
+                    cat>deployment.yaml<<-EOF
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -73,8 +69,7 @@ spec:
         name: cb-test-api
         ports:
         - containerPort: 9000
-EOF
-                    """
+EOF"""
                     sh "ls"
                     sh "pwd"
                     sh "git add ."
