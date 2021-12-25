@@ -4,7 +4,7 @@ pipeline {
         stage("git"){
             steps{
             
-                git branch: 'main', credentialsId: 'git-app', url: 'https://github.com/dhlee011/application.git'
+                git branch: 'main', credentialsId: 'git-app', url: 'https://github.com/dhlee011/Gitops_Test.git'
             }
         }
         stage('Building image') {
@@ -14,10 +14,13 @@ pipeline {
                     
                     sh '''
                     docker info
-                    git clone https://github.com/dhlee011/application.git
-                    docker build https://github.com/dhlee011/application.git#main:.
+                    git clone https://github.com/dhlee011/gitops_test.git
+                    docker build https://github.com/dhlee011/gitops_test.git#main:.
+                    ls -al
+                    pwd                
                     git remote remove origin
                     '''
+                    
                     
                 }
             }
@@ -38,22 +41,23 @@ pipeline {
             steps{
                 script{
                     slackSend(message: "manifestfile Push To github Start!" , color: 'good', tokenCredentialId: 'slack-key')
-                    sh '''
-                    git rm -r --cached .
-                    cd ..
-                    rm -rf application
-                    mkdir push
-                    git config --global user.name dhlee011
-                    git config --global user.email dlehdgo011@naver.com    
-                    cd push
-                    git remote -v
-                    git remote add origin https://github.com/dhlee011/k8s-manifest
-                    git add .
-                    git commit -m '1-init'
-                    git push -f https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git                     
-                    '''
-                    
-                   
+                    sh "git rm -r --cached ."
+                    sh "cd .."
+                    sh "rm -rf gitops_test"
+                    sh "mkdir ww"
+                    withCredentials([usernamePassword(credentialsId: 'git-app', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    sh "git config --global user.name dhlee011"
+                    sh "git config --global user.email dlehdgo011@naver.com"    
+                    sh "cd ww"
+                    sh "echo 'zzzzzz' > zzz"
+                    sh "git remote -v"
+                    sh "git remote add origin https://github.com/dhlee011/k8s-manifest"
+                    sh "git add ."
+                    sh "git commit -m 'test-init'"
+
+                    sh('git push -f https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git')                     
+   
+                    }
                    
                               
                 }
