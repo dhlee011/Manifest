@@ -62,14 +62,14 @@ spec:
         ports:
         - containerPort: 9000
 EOF"""
-                    sh """
-                    git config --global user.name dhlee011
-                    git config --global user.email dlehdgo011@naver.com
-                    git remote add origin https://github.com/dhlee011/k8s-manifest"                       
-                    git add .
-                    git commit -m '1-init'
-                    git push -f https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git
-                    """
+
+                    sh "git config --global user.name dhlee011"
+                    sh "git config --global user.email dlehdgo011@naver.com"
+                    sh "git remote add origin https://github.com/dhlee011/k8s-manifest"                       
+                    sh "git add ."
+                    sh "git commit -m '1-init'"
+                    sh "git push -f https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git"
+                    
                     }                                                 
                 }
             }
