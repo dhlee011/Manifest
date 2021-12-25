@@ -40,7 +40,6 @@ pipeline {
         stage('push image2') {
             steps{
                 script{
-                    try {
                     slackSend(message: "manifestfile Push To github Start!" , color: 'good', tokenCredentialId: 'slack-key')
                     git branch: 'main', credentialsId: 'git-app', url: 'https://github.com/dhlee011/application.git'
                     withCredentials([usernamePassword(credentialsId: 'git-app', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
@@ -81,8 +80,7 @@ EOF
                     sh "git commit -m '1-init'"
 
 
-                    sh "git push -f https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git"                
-                       }
+                    sh "git push -f https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git"
                     }                                                 
                 }
             }
