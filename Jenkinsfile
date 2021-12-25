@@ -55,28 +55,25 @@ pipeline {
                     git config --global user.email dlehdgo011@naver.com
                     git remote add origin https://github.com/dhlee011/k8s-manifest
                     #!/bin/bash
-                    cat>monthly_deploy.yaml<<-EOF
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: monthly-deployment
-  labels:
-    app: monthly
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: monthly
-  template:
-    metadata:
-      labels:
-        app: monthly
-    spec:
-      containers:
-      - name: monthly-cont
-        image: ${ECR_TASK_URI}:ver${env.BUILD_NUMBER}
-        ports:
-        - containerPort: 5000
+                    cat>values.yaml<<-EOF
+# Default values for ghost.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 3
+
+image:
+repository: jisunpark/cccr-dvwa-java-web
+tag: $BUILD_NUMBER
+pullPolicy: ""
+
+
+value: ec95c258266b8e985848cae688effa2b
+
+namespace: cd-test
+
+name: 
+app: app
 EOF"""
                     sh "git add ."
                     sh "git commit -m '1-init'"
