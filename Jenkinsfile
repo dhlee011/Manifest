@@ -54,13 +54,36 @@ pipeline {
                     git config --global user.name dhlee011
                     git config --global user.email dlehdgo011@naver.com
                     git remote add origin https://github.com/dhlee011/k8s-manifest
-                    echo "zz" > zz
-                    git add .
-                    git commit -m "1-init"
+                    #!/bin/bash
+                    cat>monthly_deploy.yaml<<-EOF
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monthly-deployment
+  labels:
+    app: monthly
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: monthly
+  template:
+    metadata:
+      labels:
+        app: monthly
+    spec:
+      containers:
+      - name: monthly-cont
+        image: ${ECR_TASK_URI}:ver${env.BUILD_NUMBER}
+        ports:
+        - containerPort: 5000
+EOF"""
+                    sh "git add ."
+                    sh "git commit -m '1-init'"
 
 
-                    git push -f https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git                
-                    '''
+                    sh "git push -f https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git"                
+                    
                     }
                    
                               
