@@ -54,7 +54,27 @@ pipeline {
                     git config --global user.email dlehdgo011@naver.com
                     git remote add origin https://github.com/dhlee011/k8s-manifest
                     git add .
-                    git commit -m "test-init"
+                    git commit -m "1-init"
+                    cat>nginx-deployment.yaml<<-EOF
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cb-test-api
+  namespace: prd-api
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cb-test-api
+    spec:
+      containers:
+      - image: ${ECR_TASK_URL}:ver${env.BUILD_NUMBER}
+        imagePullPolicy: Always
+        name: cb-test-api
+        ports:
+        - containerPort: 9000
+EOF
 
                     git push -f https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git                
                     '''
