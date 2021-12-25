@@ -20,7 +20,7 @@ pipeline {
                     pwd                
                     git remote remove origin
                     '''
-                    
+                    app = docker.build("902268280034.dkr.ecr.ap-northeast-2.amazonaws.com/dhlee")
                     
                 }
             }
