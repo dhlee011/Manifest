@@ -68,6 +68,9 @@ spec:
 EOF"""
                     sh "ls"
                     sh "pwd"
+                    sh "git config --global user.name dhlee011"
+                    sh "git config --global user.email dlehdgo011@naver.com"
+                    sh "git remote add origin https://github.com/dhlee011/k8s-manifest"                        
                     sh "git add ."
                     sh "git commit -m '1-init'"
                     
