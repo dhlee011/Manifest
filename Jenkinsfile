@@ -4,7 +4,7 @@ pipeline {
         stage("git"){
             steps{
             
-                git branch: 'main', credentialsId: 'git-app', url: 'https://github.com/dhlee011/Gitops_Test.git'
+                git branch: 'main', credentialsId: 'git-app', url: 'https://github.com/dhlee011/application.git'
             }
         }
         stage('Building image') {
@@ -41,7 +41,7 @@ pipeline {
             steps{
                 script{
                     slackSend(message: "manifestfile Push To github Start!" , color: 'good', tokenCredentialId: 'slack-key')
-                    git branch: 'main', credentialsId: 'git-app', url: 'https://github.com/dhlee011/application.git'
+                    git branch: 'main', credentialsId: 'git-app', url: 'https://github.com/dhlee011/k8s-manifest.git'
                     withCredentials([usernamePassword(credentialsId: 'git-app', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh """
                     git rm -r --cached .
