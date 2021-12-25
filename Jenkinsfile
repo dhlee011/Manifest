@@ -41,17 +41,12 @@ pipeline {
             steps{
                 script{
                     slackSend(message: "manifestfile Push To github Start!" , color: 'good', tokenCredentialId: 'slack-key')
-                    git branch: 'main', credentialsId: 'git-app', url: 'https://github.com/dhlee011/k8s-manifest.git'
                     withCredentials([usernamePassword(credentialsId: 'git-app', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh """
                     ls
-                    
                     pwd
                     git rm -r --cached .
-                    cd ..
-                    rm -rf nginx
-                    mkdir push
-                    cd push
+                    ls
                     #!/bin/bash
                     cat>deployment.yaml<<-EOF
 apiVersion: extensions/v1beta1
