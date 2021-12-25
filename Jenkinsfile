@@ -49,7 +49,7 @@ pipeline {
                     pwd
                     git rm -r --cached .
                     cd ..
-                    rm -rf application
+                    rm -rf nginx
                     mkdir push
                     cd push
                     #!/bin/bash
