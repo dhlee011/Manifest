@@ -23,8 +23,7 @@ pipeline {
                     
                     slackSend(message: "Docker Image Push To ECR Start!" , color: 'good', tokenCredentialId: 'slack-key')
                     docker.withRegistry('https://902268280034.dkr.ecr.ap-northeast-2.amazonaws.com', 'ecr:ap-northeast-2:AWS-KEY') {
-                    app.push("${env.BUILD_NUMBER}")
-                    app.push("nginx-latest")
+                    app.push("${env.BUILD_NUMBER}-nginx-prod")
                     
                     }                    
                 }
