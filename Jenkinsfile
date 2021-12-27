@@ -117,7 +117,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.14.2
+        image: 902268280034.dkr.ecr.ap-northeast-2.amazonaws.com/dhlee:${env.BUILD_NUMBER}-nginx-prod
         ports:
         - containerPort: 80
 
