@@ -6,11 +6,11 @@ RUN add-apt-repository -y ppa:ondrej/php
 RUN apt-get update
 RUN apt-get install -y php7.4-fpm
 RUN apt-get install -y php7.4
-RUN sed -i 's/user = apache */user = nginx/' /etc/php-fpm.d/www.conf
-RUN sed -i 's/group = apache */group = nginx/' /etc/php-fpm.d/www.conf
-RUN sed -i 's/;listen.owner = nobody */listen.owner = nginx/' /etc/php-fpm.d/www.conf
-RUN sed -i 's/;listen.group = nobody */listen.group = nginx/' /etc/php-fpm.d/www.conf
-RUN sed -i 's/listen = 127.0.0.1:9000 */listen = \/var\/run\/php-fpm\/php-fpm.sock/' /etc/php-fpm.d/www.conf
+RUN sed -i 's/user = apache */user = nginx/' /etc/opt/remi/php74/php-fpm.d/www.conf
+RUN sed -i 's/group = apache */group = nginx/' /etc/opt/remi/php74/php-fpm.d/www.conf
+RUN sed -i 's/;listen.owner = nobody */listen.owner = nginx/' /etc/opt/remi/php74/php-fpm.d/www.conf
+RUN sed -i 's/;listen.group = nobody */listen.group = nginx/' /etc/opt/remi/php74/php-fpm.d/www.conf
+RUN sed -i 's/listen = 127.0.0.1:9000 */listen = \/var\/run\/php-fpm\/php-fpm.sock/' /etc/opt/remi/php74/php-fpm.d/www.conf
 RUN sed -i '/location/d' /etc/nginx/conf.d/default.conf
 RUN sed -i '/}/d' /etc/nginx/conf.d/default.conf
 RUN sed -i "2d" /etc/nginx/conf.d/default.conf
