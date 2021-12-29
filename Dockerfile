@@ -6,7 +6,7 @@ RUN add-apt-repository -y ppa:ondrej/php
 RUN apt-get update
 RUN apt-get install -y php7.4-fpm
 RUN apt-get install -y php7.4
-RUN cd /etc/nginx/
+RUN ls /etc/nginx/
 RUN ls
 RUN include /etc/nginx/sites-enabled/*;
 WORKDIR /etc/nginx/sites-available
