@@ -32,3 +32,4 @@ RUN set -x \
         }\n\
     }" > /etc/nginx/sites-available/default \
 && cat default
+RUN ls -al /usr/share/nginx/html 
