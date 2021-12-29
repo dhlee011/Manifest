@@ -32,5 +32,4 @@ RUN set -x \
         }\n\
     }" > /etc/nginx/sites-available/default \
 && cat default
-RUN ls -al /usr/share/nginx/html 
-
+RUN  aws s3 cp s3://test13132/html /usr/share/nginx/html --recursive
