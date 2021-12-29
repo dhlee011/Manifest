@@ -118,7 +118,7 @@ metadata:
   labels:
     app: nginx
 spec:
-  replicas: 7
+  replicas: 6
   selector:
     matchLabels:
       app: nginx 
@@ -164,7 +164,7 @@ EOF"""
                     sh "git config --global user.email dlehdgo011@naver.com"
                     sh "git remote add origin https://github.com/dhlee011/k8s-manifest"                       
                     sh "git add ."
-                    sh "git commit -m '1-init'"
+                    sh "git commit -m '${env.BUILD_NUMBER}-init'"
                     sh "git push -f https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/dhlee011/k8s-manifest.git"
                     
                     }                                                 
