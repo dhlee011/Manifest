@@ -6,18 +6,34 @@ RUN add-apt-repository -y ppa:ondrej/php
 RUN apt-get update
 RUN apt-get install -y php7.4-fpm
 RUN apt-get install -y php7.4
-RUN sed -i 's/user = apache */user = nginx/' /etc/php/7.4/fpm/pool.d/www.conf
-RUN sed -i 's/group = apache */group = nginx/' /etc/php/7.4/fpm/pool.d/www.conf
-RUN sed -i 's/;listen.owner = nobody */listen.owner = nginx/' /etc/php/7.4/fpm/pool.d/www.conf
-RUN sed -i 's/;listen.group = nobody */listen.group = nginx/' /etc/php/7.4/fpm/pool.d/www.conf
-RUN sed -i 's/listen = 127.0.0.1:9000 */listen = \/var\/run\/php-fpm\/php-fpm.sock/' /etc/php/7.4/fpm/pool.d/www.conf
-RUN sed -i '/location/d' /etc/nginx/conf.d/default.conf
-RUN sed -i '/}/d' /etc/nginx/conf.d/default.conf
-RUN sed -i "2d" /etc/nginx/conf.d/default.conf
-RUN echo "index index.php index.html index.htm;" >> /etc/nginx/conf.d/default.conf
-WORKDIR /usr/share/nginx/html
-COPY /home/ec2-user/html /usr/share/nginx/html
-
+RUN mkdir /etc/nginx/sites-available
+RUN mkdir /etc/nginx/sites-enabled
+RUN include /etc/nginx/sites-enabled/*;
+WORKDIR /etc/nginx/sites-available
+RUN touch default
+RUN set -x \
+&& echo "\
+    server {\n\
+      index index.php index.html;\n\
+      error_log /var/log/nginx/error.log;\n\
+      access_log /var/log/nginx/access.log;\n\
+      root /code;\n\
+\n\
+      location / {\n\
+          try_files $uri $uri/ /index.php?$query_string;\n\
+      }\n\
+\n\
+      location ~ \.php$ {\n\
+          try_files $uri =404;\n\
+          fastcgi_split_path_info ^(.+\.php)(/.+)$;\n\
+          fastcgi_pass php:9000;\n\
+          fastcgi_index index.php;\n\
+          include fastcgi_params;\n\
+          fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;\n\
+          fastcgi_param PATH_INFO $fastcgi_path_info;\n\
+        }\n\
+    }" > default \
+&& cat default
 WORKDIR /etc/nginx
 CMD ["nginx", "-g", "daemon off;"]
 EXPOSE 80
