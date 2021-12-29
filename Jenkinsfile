@@ -137,7 +137,7 @@ EOF"""
                     #!/bin/bash
                     cat>nginx-Ingress.yaml<<-EOF                           
 ---
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io
 kind: Ingress
 metadata:
   namespace: nginx
