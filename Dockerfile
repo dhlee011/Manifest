@@ -33,3 +33,4 @@ RUN set -x \
     }" > /etc/nginx/sites-available/default \
 && cat default
 RUN ls -al /usr/share/nginx/html 
+RUN is -al /home/ec2-user/html
