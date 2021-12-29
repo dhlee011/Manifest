@@ -40,7 +40,7 @@ pipeline {
                     rm -rf *
                     ls
                     #!/bin/bash
-                    cat>nginx.yaml<<-EOF
+                    cat>nginx-ServiceAccount.yaml<<-EOF
                     
 ---
 apiVersion: v1
@@ -50,6 +50,11 @@ metadata:
     app.kubernetes.io/name: alb-ingress-controller
   name: alb-ingress-controller
   namespace: nginx
+  
+EOF"""
+                    sh """
+                    #!/bin/bash
+                    cat>nginx-ALB-Deployment.yaml<<-EOF
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -75,7 +80,12 @@ spec:
             - --aws-vpc-id=vpc-01caf96063ed0cbd9		##########
             - --aws-region=ap-northeast-2
           image: docker.io/amazon/aws-alb-ingress-controller:v1.1.3
-      serviceAccountName: alb-ingress-controller                    
+      serviceAccountName: alb-ingress-controller
+
+EOF"""
+                    sh """
+                    #!/bin/bash
+                    cat>nginx-Service.yaml<<-EOF                    
 ---
 apiVersion: v1
 kind: Service
@@ -92,6 +102,13 @@ spec:
   - port: 8080
     protocol: TCP
     targetPort: 80
+
+EOF"""
+
+                    sh """
+                    #!/bin/bash
+                    cat>nginx-Deployment.yaml<<-EOF                        
+                        
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -115,6 +132,10 @@ spec:
         image: 902268280034.dkr.ecr.ap-northeast-2.amazonaws.com/dhlee:${env.BUILD_NUMBER}-nginx-prod
         ports:
         - containerPort: 80
+EOF"""
+                    sh """
+                    #!/bin/bash
+                    cat>nginx-Ingress.yaml<<-EOF                           
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -137,6 +158,7 @@ spec:
                 port:
                   number: 8080
 EOF"""
+
 
                     sh "git config --global user.name dhlee011"
                     sh "git config --global user.email dlehdgo011@naver.com"
