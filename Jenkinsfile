@@ -118,7 +118,7 @@ metadata:
   labels:
     app: nginx
 spec:
-  replicas: 6
+  replicas: 3
   selector:
     matchLabels:
       app: nginx 
@@ -137,7 +137,7 @@ EOF"""
                     #!/bin/bash
                     cat>nginx-Ingress.yaml<<-EOF                           
 ---
-apiVersion: networking.k8s.io
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: nginx
