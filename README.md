@@ -1,1 +1,1 @@
-K8s-manifest
+Manifest repository
